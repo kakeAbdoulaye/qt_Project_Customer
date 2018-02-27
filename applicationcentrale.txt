@@ -1,0 +1,191 @@
+#include "applicationcentrale.h"
+#include "ui_applicationcentrale.h"
+
+ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::ApplicationCentrale)
+{
+    this->actionGroup = new QActionGroup(this);
+    connect(actionGroup,SIGNAL(triggered(QAction*)),this,SLOT(manageAction(QAction*)));
+    ui->setupUi(this);
+    menuBar()->addSeparator();
+    initFileMenu();
+    initHelpMenu();
+    initToolBar();
+}
+
+ApplicationCentrale::~ApplicationCentrale()
+{
+    delete ui;
+}
+
+void ApplicationCentrale::initFileMenu()
+{
+    this->fileMenu = new QMenu(tr("&File"),this);
+    menuBar()->addMenu(fileMenu);
+
+   this->actionExit = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//exit.png"),tr("&Exit"),this);
+   fileMenu->addAction(this->actionExit);
+   this->actionGroup->addAction(this->actionExit);
+
+   this->addMenu = new QMenu(tr("Create/&Add"),this);
+   fileMenu->addMenu(this->addMenu);
+   this->actionAddCustomer = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//addCustumer.png"),tr("&Customer"),this);
+   this->actionAddEmployer = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//addEmployer.jpg"),tr("Em&ployer"),this);
+   this->addMenu->addAction(this->actionAddCustomer);
+   this->addMenu->addAction(this->actionAddEmployer);
+   this->actionGroup->addAction(this->actionAddCustomer);
+   this->actionGroup->addAction(this->actionAddEmployer);
+}
+void ApplicationCentrale::initHelpMenu()
+{
+    this->helpMenu = new QMenu(tr("&?"),this);
+    menuBar()->addMenu(helpMenu);
+
+    this->actionAbout = new QAction(tr("Abou&t"),this);
+    this->helpMenu->addAction(this->actionAbout);
+    this->actionGroup->addAction(this->actionAbout);
+
+}
+void ApplicationCentrale::manageAction(QAction *sender)
+{
+    if(sender == this->actionExit)
+    {
+        exitApplication();
+    }
+}
+void ApplicationCentrale::exitApplication()
+{
+    this->close();
+}
+void ApplicationCentrale::initToolBar()
+{
+    QToolBar * addBarTool =   addToolBar("File 6");
+    addBarTool->setFloatable(false);
+    addBarTool->setMovable(false);
+    addBarTool->addAction(this->actionAddCustomer);
+    addBarTool->addSeparator();
+    addBarTool->addAction(this->actionAddEmployer);
+    ui->statusBar->showMessage("hi");
+}
+
+
+/**
+
+
+**/
+#include "applicationcentrale.h"
+#include "ui_applicationcentrale.h"
+
+ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::ApplicationCentrale)
+{
+    this->actionGroup = new QActionGroup(this);
+    connect(actionGroup,SIGNAL(triggered(QAction*)),this,SLOT(manageAction(QAction*)));
+    ui->setupUi(this);
+    menuBar()->addSeparator();
+    initFileMenu();
+    initHelpMenu();
+    initToolBar();
+}
+
+ApplicationCentrale::~ApplicationCentrale()
+{
+    delete ui;
+}
+
+void ApplicationCentrale::initFileMenu()
+{
+    this->fileMenu = new QMenu(tr("&File"),this);
+    ui->menuBar->addMenu(fileMenu);
+
+   this->actionExit = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//exit.png"),tr("&Exit"),this);
+   fileMenu->addAction(this->actionExit);
+   this->actionGroup->addAction(this->actionExit);
+
+   this->addMenu = new QMenu(tr("Create/&Add"),this);
+   fileMenu->addMenu(this->addMenu);
+   this->actionAddCustomer = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//addCustumer.png"),tr("&Customer"),this);
+   this->actionAddEmployer = new QAction(QIcon(QCoreApplication::applicationDirPath()+"//Images//addEmployer.jpg"),tr("Em&ployer"),this);
+   this->addMenu->addAction(this->actionAddCustomer);
+   this->addMenu->addAction(this->actionAddEmployer);
+   this->actionGroup->addAction(this->actionAddCustomer);
+   this->actionGroup->addAction(this->actionAddEmployer);
+}
+void ApplicationCentrale::initHelpMenu()
+{
+    this->helpMenu = new QMenu(tr("&?"),this);
+    ui->menuBar->addMenu(helpMenu);
+
+    this->actionAbout = new QAction(tr("Abou&t"),this);
+    this->helpMenu->addAction(this->actionAbout);
+    this->actionGroup->addAction(this->actionAbout);
+
+}
+void ApplicationCentrale::manageAction(QAction *sender)
+{
+    if(sender == this->actionExit)
+    {
+        exitApplication();
+    }
+}
+void ApplicationCentrale::exitApplication()
+{
+    this->close();
+}
+void ApplicationCentrale::initToolBar()
+{
+    ui->mainToolBar->setFloatable(false);
+    ui->mainToolBar->setMovable(false);
+    ui->mainToolBar->addAction(this->actionAddCustomer);
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addAction(this->actionAddEmployer);
+    //ui->statusBar->showMessage("hi");
+}
+
+/***
+
+
+*//
+
+#ifndef APPLICATIONCENTRALE_H
+#define APPLICATIONCENTRALE_H
+
+#include <QMainWindow>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
+namespace Ui {
+class ApplicationCentrale;
+}
+
+class ApplicationCentrale : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit ApplicationCentrale(QWidget *parent = 0);
+    ~ApplicationCentrale();
+
+private:
+    Ui::ApplicationCentrale *ui;
+    QMenu * fileMenu;
+    QMenu * helpMenu;
+    QMenu * addMenu;
+    QAction * actionExit;
+    QAction * actionAddCustomer;
+    QAction * actionAddEmployer;
+    QAction * actionAbout;
+    QActionGroup * actionGroup ;
+
+    void initFileMenu();
+    void initHelpMenu();
+    void initToolBar();
+
+private slots:
+    void exitApplication();
+    void manageAction(QAction * sender);
+};
+
+#endif // APPLICATIONCENTRALE_H
