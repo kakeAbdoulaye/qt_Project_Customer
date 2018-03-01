@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "applicationcentrale.h"
+#include "interfacedb.h"
 #include <QMessageBox>
 namespace Ui {
 class ConnexionUser;

@@ -17,14 +17,14 @@
    <widget class="QTabWidget" name="tabWidgetCentrale">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>30</y>
+      <x>-90</x>
+      <y>-80</y>
       <width>901</width>
       <height>381</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabSearchCustomer">
      <attribute name="title">
@@ -34,6 +34,11 @@
     <widget class="QWidget" name="tabPlanning">
      <attribute name="title">
       <string>Planning</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Page</string>
      </attribute>
     </widget>
    </widget>

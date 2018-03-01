@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,14 +29,18 @@ SOURCES += \
     connexionuser.cpp \
     addcustomergui.cpp \
     addstaffgui.cpp \
-    windowsabout.cpp
+    windowsabout.cpp \
+    c_init_bd.cpp \
+    interfacedb.cpp
 
 HEADERS += \
         applicationcentrale.h \
     connexionuser.h \
     addcustomergui.h \
     addstaffgui.h \
-    windowsabout.h
+    windowsabout.h \
+    c_init_bd.h \
+    interfacedb.h
 
 FORMS += \
         applicationcentrale.ui \

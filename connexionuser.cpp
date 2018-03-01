@@ -20,14 +20,13 @@ void ConnexionUser::exitConnexion()
 }
 bool ConnexionUser::checkLoginPassword()
 {
-    QString initLogin = "kake";
-    QString initPassword = "leloup";
-
-    QString login = ui->lineEditLogin->text();
+    QString login = ui->lineEditLogin->text().trimmed();
     QString password = ui->lineEditPassword->text();
-    if(!login.isEmpty() && !password.isEmpty() && initLogin == login && initPassword == password)
+
+    if(!login.isEmpty() && !password.isEmpty())
     {
-        return true ;
+        InterfaceDB interface;
+        return interface.createConnection() && interface.checkLoginPasswordDB(login,password);
     }
     else
     {

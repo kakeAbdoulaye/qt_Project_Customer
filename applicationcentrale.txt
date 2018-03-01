@@ -189,3 +189,24 @@ private slots:
 };
 
 #endif // APPLICATIONCENTRALE_H
+
+
+/**
+*/
+
+
+Another "solution". I came up with the following workaround: First I set the visible column to 0, retrieve the type_id, then set back the visible column to 1.
+
+ui->comboType->setModelColumn(0);
+int type_id = ui->comboType->currentText().toInt();
+ui->comboType->setModelColumn(1);
+
+I don't know how correct is to do this way, but it works.
+
+EDIT: Finally, I found the solution. I just needed to modify a bit king_nak-s answer. Thank you king_nak!
+
+int row = myComboBox->currentIndex();
+QModelIndex idx = myComboBox->model()->index(row, 0); // first column
+QVariant data = myComboBox->model()->data(idx);
+int type_id = data.toInt();
+

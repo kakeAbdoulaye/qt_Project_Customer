@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::AddCustomerGUI *ui;
+ private slots:
+    void upCaseforLetter(QString line);
+
 };
 
 #endif // ADDCUSTOMERGUI_H
