@@ -31,7 +31,11 @@ SOURCES += \
     addstaffgui.cpp \
     windowsabout.cpp \
     c_init_bd.cpp \
-    interfacedb.cpp
+    interfacedb.cpp \
+    adresse.cpp \
+    client.cpp \
+    ressource.cpp \
+    personne.cpp
 
 HEADERS += \
         applicationcentrale.h \
@@ -40,7 +44,11 @@ HEADERS += \
     addstaffgui.h \
     windowsabout.h \
     c_init_bd.h \
-    interfacedb.h
+    interfacedb.h \
+    adresse.h \
+    client.h \
+    ressource.h \
+    personne.h
 
 FORMS += \
         applicationcentrale.ui \
