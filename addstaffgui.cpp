@@ -19,10 +19,11 @@ AddStaffGUI::~AddStaffGUI()
 void AddStaffGUI::addModelToCombox()
 {
     InterfaceDB dataBase ;
-    dataBase.createConnection();
+   // dataBase.createConnection();
     QSqlTableModel * modelCombox = dataBase.getAllType();
     ui->comboBoxType->setModel(modelCombox);
     ui->comboBoxType->setModelColumn(modelCombox->fieldIndex("label"));
+   //dataBase.closeConnection();
 
 }
 void AddStaffGUI::activeGroupBox(QString select)

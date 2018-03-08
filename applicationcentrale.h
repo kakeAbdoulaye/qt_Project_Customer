@@ -27,7 +27,8 @@ private:
 
 
     void initGroupAction();
-
+    void initTreeViewPerson();
+    void initTableViewCustomer();
 
 private slots:
     void exitApplication();

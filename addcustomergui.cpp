@@ -14,11 +14,11 @@ AddCustomerGUI::AddCustomerGUI(QWidget *parent) :
     QDate today = QDate::currentDate();
     ui->dateEditDateRendezVous->setDateRange(today,ui->dateEditDateRendezVous->maximumDate());
     InterfaceDB bd ;
-    bd.createConnection();
     QSqlTableModel * tt = bd.getAllRessource();
     ui->comboBoxlistResource->setModel(tt);
-    ui->comboBoxlistResource->setModelColumn(tt->fieldIndex("id"));
     ui->comboBoxlistResource->setModelColumn(tt->fieldIndex("nom"));
+
+
 }
 
 AddCustomerGUI::~AddCustomerGUI()

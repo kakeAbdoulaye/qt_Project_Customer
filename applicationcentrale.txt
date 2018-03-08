@@ -210,3 +210,36 @@ QModelIndex idx = myComboBox->model()->index(row, 0); // first column
 QVariant data = myComboBox->model()->data(idx);
 int type_id = data.toInt();
 
+
+   QApplication app(argc, argv);
+
+        QStandardItemModel model(3, 2); // 3 rows, 1 col
+        for (int r = 0; r < 3; ++r)
+        {
+            QStandardItem* item = new QStandardItem(QString("Item %0").arg(r));
+
+            item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+            item->setData(Qt::Unchecked, Qt::CheckStateRole);
+
+            model.setItem(r, 0, item);
+        }
+
+        QComboBox* combo = new QComboBox();
+        combo->setModel(&model);
+
+        QListView* list = new QListView();
+        list->setModel(&model);
+
+        QTableView* table = new QTableView();
+        table->setModel(&model);
+
+        QWidget container;
+        QVBoxLayout* containerLayout = new QVBoxLayout();
+        container.setLayout(containerLayout);
+        containerLayout->addWidget(combo);
+        containerLayout->addWidget(list);
+        containerLayout->addWidget(table);
+
+        container.show();
+
+        return app.exec();

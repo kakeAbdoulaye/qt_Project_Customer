@@ -1,6 +1,9 @@
 #include "applicationcentrale.h"
 #include "ui_applicationcentrale.h"
 #include <QMessageBox>
+#include <Qt>
+#include <QStandardItem>
+
 ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ApplicationCentrale)
@@ -8,6 +11,8 @@ ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
 
     ui->setupUi(this);
     initGroupAction();
+    initTreeViewPerson();
+    initTableViewCustomer();
     ui->statusBar->showMessage("You have just connected",15000);
 }
 
@@ -80,6 +85,18 @@ void ApplicationCentrale::exitApplication()
     this->close();
 }
 
+void ApplicationCentrale::initTreeViewPerson()
+{
+    InterfaceDB dataBase ;
+    QStandardItemModel * monModel = dataBase.getAllRessource_TreeView() ;
+    ui->treeViewPerson->setModel(monModel);
+}
+void ApplicationCentrale::initTableViewCustomer()
+{
+     InterfaceDB dataBase ;
+     QSqlTableModel * model = dataBase.getAllCustomer() ;
+     ui->listViewCustomer->setModel(model);
+}
 
 
 

@@ -22,11 +22,15 @@ bool ConnexionUser::checkLoginPassword()
 {
     QString login = ui->lineEditLogin->text().trimmed();
     QString password = ui->lineEditPassword->text();
+    bool check = false ;
 
     if(!login.isEmpty() && !password.isEmpty())
     {
         InterfaceDB interface;
-        return interface.createConnection() && interface.checkLoginPasswordDB(login,password);
+      //  check = interface.createConnection();
+       // check = check && interface.checkLoginPasswordDB(login,password);
+      //  interface.closeConnection();
+        return  interface.checkLoginPasswordDB(login,password);
     }
     else
     {
