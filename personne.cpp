@@ -10,7 +10,7 @@ Personne::Personne()
     perEntId = 0;
 }
 
-Personne::Personne(int entId ,string strNom, string strPrenom, int entTelephone)
+Personne::Personne(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone)
 {
     perEntId = entId;
     perStrNom = strNom;
@@ -31,11 +31,4 @@ Personne::~Personne()
 {
 }
 
-void Personne::perAffichePersonne()
-{
-    cout << "Identifiant : " << perEntId << endl;
-    cout << "Nom : " << this->perStrNom << endl;
-    cout << "PreNom : " << this->perStrPrenom << endl;
-    cout << "Num Tel  : " << this->perEntTelephone << endl;
-    cout << "-------------------------------------------------------------" << endl;
-}
+

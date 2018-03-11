@@ -24,6 +24,9 @@ public:
 private:
     Ui::ApplicationCentrale *ui;
     QActionGroup * actionGroup ;
+    InterfaceDB dataBase ;
+    QSqlTableModel * modelSQl;
+    QStandardItemModel * modelSTANITEM;
 
 
     void initGroupAction();
@@ -33,6 +36,7 @@ private:
 private slots:
     void exitApplication();
     void manageAction(QAction * sender);
+    void filtered();
 };
 
 #endif // APPLICATIONCENTRALE_H

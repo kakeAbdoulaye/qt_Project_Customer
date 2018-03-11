@@ -19,6 +19,8 @@ public:
 private:
     Ui::AddStaffGUI *ui;
     void addModelToCombox();
+signals:
+    void emitActiveGroupBox(QString select);
 private slots:
     void activeGroupBox(QString select);
 

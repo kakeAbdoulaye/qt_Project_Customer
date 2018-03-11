@@ -55,10 +55,11 @@ public:
     bool createConnection();
     bool closeConnection();
     bool checkLoginPasswordDB(QString login , QString password);
-    QSqlRelationalTableModel * getAllRessource();
+    QStandardItemModel  * getAllRessource(qint32 id=-1);
     QStandardItemModel * getAllRessource_TreeView();
-    QSqlTableModel * getAllType();
+    QSqlTableModel * getAllType(qint32 id=-1);
     QSqlTableModel * getAllCustomer();
+    QSqlTableModel * getAllCustomerFiltered(QString name,QString fname,QString date1 , QString date2 ,qint32 id);
 
 private :
     QSqlDatabase dataBase ;

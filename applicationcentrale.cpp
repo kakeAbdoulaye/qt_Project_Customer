@@ -8,12 +8,12 @@ ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ApplicationCentrale)
 {
-
     ui->setupUi(this);
     initGroupAction();
     initTreeViewPerson();
     initTableViewCustomer();
     ui->statusBar->showMessage("You have just connected",15000);
+    connect(ui->ButtonSearch,SIGNAL(clicked(bool)),this,SLOT(filtered()));
 }
 
 ApplicationCentrale::~ApplicationCentrale()
@@ -87,15 +87,25 @@ void ApplicationCentrale::exitApplication()
 
 void ApplicationCentrale::initTreeViewPerson()
 {
-    InterfaceDB dataBase ;
-    QStandardItemModel * monModel = dataBase.getAllRessource_TreeView() ;
-    ui->treeViewPerson->setModel(monModel);
+   modelSTANITEM = dataBase.getAllRessource_TreeView() ;
+    ui->treeViewPerson->setModel(modelSTANITEM);
 }
 void ApplicationCentrale::initTableViewCustomer()
 {
-     InterfaceDB dataBase ;
-     QSqlTableModel * model = dataBase.getAllCustomer() ;
-     ui->listViewCustomer->setModel(model);
+     modelSQl = dataBase.getAllCustomer() ;
+     ui->tableViewCustomer->setModel(modelSQl);
+     ui->lineEditIdenSearch->setValidator(new QIntValidator(0,999999999,this));
+}
+void ApplicationCentrale::filtered()
+{
+    qint32 TClient_Id = ui->lineEditIdenSearch->text().toInt();
+    QString TClient_Nom=ui->lineEditNameSearch->text();
+    QString TClient_Prenom=ui->lineEditFisrtNameSearch->text();
+    QString TClient_DateRdv1= ui->dateEditSearch1->text();
+    QString TClient_DateRdv2=ui->dateEditSearch2->text();
+    modelSQl = dataBase.getAllCustomerFiltered(TClient_Nom,TClient_Prenom,TClient_DateRdv1,TClient_DateRdv2,TClient_Id);
+    ui->tableViewCustomer->setModel(modelSQl);
+    ui->lineEditIdenSearch->setValidator(new QIntValidator(0,999999999,this));
 }
 
 

@@ -2,33 +2,31 @@
 #ifndef  ADRESSE_H
 #define ADRESSE_H
 #include <iostream>
-#include <string>
+#include <QString>
 using namespace std;
 
 
 class Adresse
 {
 private:
-    string adrStrAdresse;
-    int adrEntCodePostale;
-    string adrStrVille;
+    QString adrStrAdresse;
+    qint32 adrEntCodePostale;
+    QString adrStrVille;
 public:
     Adresse();
-    Adresse(string strAdresse , string strVille, int EntCodePostale);
+    Adresse(QString strAdresse , QString strVille, qint32 EntCodePostale);
     Adresse(Adresse const& adresse);
     ~Adresse();
 
 
-    void adrAfficheAdresse();
 
+    QString getADRAdresse() { return adrStrAdresse; }
+    QString getADRVille() { return adrStrVille; }
+    qint32 getADRCodePostale() { return adrEntCodePostale; }
 
-    string getADRAdresse() { return adrStrAdresse; }
-    string getADRVille() { return adrStrVille; }
-    int getADRCodePostale() { return adrEntCodePostale; }
-
-    void setADRAdresse(string strAdresse) { adrStrAdresse = strAdresse; }
-    void setADRVille(string strVille) { adrStrVille = strVille; }
-    void setADRCodePostale(int EntCodePostale) { adrEntCodePostale = EntCodePostale; }
+    void setADRAdresse(QString strAdresse) { adrStrAdresse = strAdresse; }
+    void setADRVille(QString strVille) { adrStrVille = strVille; }
+    void setADRCodePostale(qint32 EntCodePostale) { adrEntCodePostale = EntCodePostale; }
 
 };
 #endif

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
    // AddCustomerGUI gui ;
    // gui.exec();
-   // AddStaffGUI staff ;
+    //AddStaffGUI staff ;
     //staff.exec();
     return a.exec();
 

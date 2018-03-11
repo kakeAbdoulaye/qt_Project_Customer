@@ -9,7 +9,6 @@ Client::Client()
     patStrCommentaire = "";
     patEntDureeConsultation = 0;
     patEntPriorite = 0;
-    //patVecIdenRessource = vector<int>(1);
 }
 
 Client::Client(Client const & client)
@@ -22,37 +21,48 @@ Client::Client(Client const & client)
     patVecIdenRessource = client.patVecIdenRessource;
 }
 
-Client::Client(Personne  personne, Adresse  adresse, int entDuree, int entPrio, string strCom)
+Client::Client(Personne  personne, Adresse  adresse, qint32 entDuree, qint32 entPrio, QString strCom)
 {
     patPersonne = personne;
     patAdresse = adresse ;
     patStrCommentaire = strCom;
     patEntDureeConsultation = entDuree;
     patEntPriorite = entPrio;
-    //patVecIdenRessource = vector<int>(1);
 }
-
-
+Client::Client(Personne  personne, Adresse  adresse, QTime Duree, qint32 entPrio, QString strCom)
+{
+    patPersonne = personne;
+    patAdresse = adresse ;
+    patStrCommentaire = strCom;
+    patEntDureeConsultation = convertirTime(Duree);
+    patEntPriorite = entPrio;
+}
+qint32 Client::convertirTime(QTime Duree)
+{
+    qint64 heure = Duree.hour();
+    qint64 minute = Duree.minute();
+    return heure*60+minute;
+}
 Client::~Client()
 {
 
 }
 
-void Client::ajouterIdenRessource(int entNombre)
+void Client::ajouterIdenRessource(qint32 entNombre)
 {
     this->patVecIdenRessource.push_back(entNombre);
 }
 
-void Client::supprimerIdenRessource(int entPosition)
+void Client::supprimerIdenRessource(qint32 entPosition)
 {
-    vector<int>::iterator myIterator;
+    QVector<qint32>::iterator myIterator;
     myIterator = this->patVecIdenRessource.begin() + entPosition;
     this->patVecIdenRessource.erase(myIterator);
 }
 
-int Client::getIdenRessource(int entPosition)
+qint32 Client::getIdenRessource(int entPosition)
 {
-    vector<int>::iterator myIterator;
+    QVector<qint32>::iterator myIterator;
     myIterator = this->patVecIdenRessource.begin() + entPosition;
     return *myIterator;
 }
@@ -62,39 +72,15 @@ void Client::viderListeIdenRessource()
     this->patVecIdenRessource.clear();
 }
 
-int Client::dureeParExamen()
+qint32 Client::dureeParExamen()
 {
     return patEntDureeConsultation / patVecIdenRessource.size();
 }
 
-void Client::afficheClient()
+
+qint32 Client::getIndicePriorite()
 {
-
-
-    patPersonne.perAffichePersonne();
-    patAdresse.adrAfficheAdresse();
-    cout << "Duree de la consultation : " << this->patEntDureeConsultation << endl;
-    cout << "Priorite du Client : " << this->patEntPriorite << endl;
-    cout << "Commentaire sur le Client : " << this->patStrCommentaire << endl;
-    cout << "Nombre de Ressource demander : " << this->patVecIdenRessource.size() << endl;
-    afficheRessource();
-    cout << "-------------------------------------------------------------" << endl;
-    cout << endl;
-}
-
-void Client::afficheRessource()
-{
-    vector <int> ::iterator it;
-    cout << "Les Identifiants ressources : " << endl;
-    for (it = patVecIdenRessource.begin(); it != patVecIdenRessource.end(); it++)
-    {
-        cout << "No Ressource : " << *it << endl;
-    }
-}
-
-int Client::getIndicePriorite()
-{
-    int valeur1 = 0;
+    qint32 valeur1 = 0;
     valeur1 = (getPATPriorite() * 100) + (getNombreRessource() * 10) + getPATDureeConsultation();
     return valeur1 ;
 }

@@ -3,37 +3,34 @@
 #define PERSONNE_H
 
 #include <iostream>
-#include <string>
+#include <QString>
 
 using namespace std;
 
 class Personne
 {
 private :
-    int perEntId;
-    string perStrNom;
-    string perStrPrenom;
-    int perEntTelephone;
+    qint32 perEntId;
+    QString perStrNom;
+    QString perStrPrenom;
+    qint32 perEntTelephone;
 
 
 public:
     Personne();
-    Personne(int entId ,string strNom, string strPrenom, int entTelephone);
+    Personne(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone);
     Personne(Personne const& personne);
     ~Personne();
 
+    QString getPERNom() { return perStrNom; }
+    QString getPERPrenom() { return perStrPrenom; }
+    qint32 getPERTelephone() { return perEntTelephone; }
+    qint32 getPERID() { return perEntId; }
 
-    void perAffichePersonne();
-
-    string getPERNom() { return perStrNom; }
-    string getPERPrenom() { return perStrPrenom; }
-    int getPERTelephone() { return perEntTelephone; }
-    int getPERID() { return perEntId; }
-
-    void setPERNom(string strNom) {  perStrNom = strNom; }
-    void setPERPrenom(string strPrenom) { perStrPrenom = strPrenom; }
-    void setPERTelephone(int entTelephone) { perEntTelephone = entTelephone; }
-    void setPERID(int entId) {  perEntId = entId; }
+    void setPERNom(QString strNom) {  perStrNom = strNom; }
+    void setPERPrenom(QString strPrenom) { perStrPrenom = strPrenom; }
+    void setPERTelephone(qint32 entTelephone) { perEntTelephone = entTelephone; }
+    void setPERID(qint32 entId) {  perEntId = entId; }
 };
 
 #endif // !PERSONNE_H

@@ -70,18 +70,75 @@ bool InterfaceDB::checkLoginPasswordDB(QString login, QString password)
         return check;
     }
 }
- QSqlRelationalTableModel * InterfaceDB::getAllRessource()
+ QStandardItemModel  * InterfaceDB::getAllRessource(qint32 id)
 {
+    QStandardItemModel * monModel =new QStandardItemModel  ;
+    QMap<qint32,qint32> monMap ;
+    QMap<qint32,qint32>::iterator iteratorMap;
+    QString space =" ";
+    bool find=false;
+    QString request = "SELECT * FROM TRdv WHERE  TRdv.IdClient=:iduser";
     createConnection();
-    QSqlRelationalTableModel * model = new  QSqlRelationalTableModel;
-    model->setTable("TRessource");
-    model->setRelation(TRessource_idType,QSqlRelation("TType","Id","Label"));
-    model->setHeaderData(TRessource_Nom,Qt::Horizontal,"Name");
-    model->setHeaderData(TRessource_Prenom,Qt::Horizontal,"First Name");
-    model->setHeaderData(TRessource_idType,Qt::Horizontal,"Type");
-    model->select();
+    this->query = QSqlQuery(dataBase);
+    this->query.prepare(request);
+    this->query.bindValue(":iduser",id);
+
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            qint32 key = query.value("IdRessource").toInt();
+            qint32 value= query.value("IdClient").toInt();
+            qDebug()<<key<<space<<value;
+            monMap.insert(key,value);
+        }
+    }
+    request = "SELECT * FROM TRessource";
+    if(id == -1)
+    {
+        if(query.exec(request))
+        {
+            while(query.next())
+            {
+                QString itemString = query.value("Nom").toString()+space+query.value("Prenom").toString();
+                QStandardItem * item = new QStandardItem(itemString);
+                item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+                item->setData(Qt::Unchecked, Qt::CheckStateRole);
+                monModel->appendRow(item);
+            }
+        }
+    }
+    else
+    {
+        if(query.exec(request))
+         {
+             while(query.next())
+             {
+                QString itemString = query.value("Nom").toString()+space+query.value("Prenom").toString();
+                QStandardItem * item = new QStandardItem(itemString);
+                item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+                for (iteratorMap = monMap.begin(); iteratorMap != monMap.end() && find == false; ++iteratorMap)
+                {
+                   if(iteratorMap.key() == query.value("Id").toInt())
+                   {
+                       item->setData(Qt::Checked, Qt::CheckStateRole);
+                       find = true;
+                   }
+                   else
+                   {
+                       item->setData(Qt::Unchecked, Qt::CheckStateRole);
+                       find=false;
+                   }
+                }
+                find = false;
+                monModel->appendRow(item);
+
+              }
+          }
+    }
+
     closeConnection();
-    return model;
+    return monModel;
 }
  QStandardItemModel * InterfaceDB::getAllRessource_TreeView()
  {
@@ -130,11 +187,16 @@ bool InterfaceDB::checkLoginPasswordDB(QString login, QString password)
 
      return monModel;
  }
-QSqlTableModel * InterfaceDB::getAllType()
+QSqlTableModel * InterfaceDB::getAllType(qint32 id)
 {
     createConnection();
     QSqlTableModel * model = new QSqlTableModel;
     model->setTable("TType");
+    qDebug()<<id;
+    if(id != -1)
+    {
+        model->setFilter(QString("Id='%1'").arg(id));
+    }
     model->select();
     closeConnection();
     return model;
@@ -144,6 +206,38 @@ QSqlTableModel * InterfaceDB::getAllCustomer()
     createConnection();
     QSqlTableModel * model = new QSqlTableModel;
     model->setTable("TClient");
+    model->setHeaderData(TClient_Id,Qt::Horizontal,"Identification");
+    model->setHeaderData(TClient_Nom,Qt::Horizontal,"Name");
+    model->setHeaderData(TClient_Prenom,Qt::Horizontal,"First Name");
+    model->setHeaderData(TClient_Adresse,Qt::Horizontal,"Address");
+    model->setHeaderData(TClient_Ville,Qt::Horizontal,"Town");
+    model->setHeaderData(TClient_CP,Qt::Horizontal,"Postal Code");
+    model->setHeaderData(TClient_Tel,Qt::Horizontal,"Telephone");
+    model->setHeaderData(TClient_Commentaire,Qt::Horizontal,"Information");
+    model->setHeaderData(TClient_DateRdv,Qt::Horizontal,"Date");
+    model->setHeaderData(TClient_Priorite,Qt::Horizontal,"Priority");
+    model->select();
+    closeConnection();
+    return model;
+}
+QSqlTableModel * InterfaceDB::getAllCustomerFiltered(QString name, QString fname, QString date1, QString date2, qint32 id)
+{
+    QString filter="";
+    createConnection();
+    QSqlTableModel * model = new QSqlTableModel;
+    model->setTable("TClient");
+    model->setHeaderData(TClient_Id,Qt::Horizontal,"Identification");
+    model->setHeaderData(TClient_Nom,Qt::Horizontal,"Name");
+    model->setHeaderData(TClient_Prenom,Qt::Horizontal,"First Name");
+    model->setHeaderData(TClient_Adresse,Qt::Horizontal,"Address");
+    model->setHeaderData(TClient_Ville,Qt::Horizontal,"Town");
+    model->setHeaderData(TClient_CP,Qt::Horizontal,"Postal Code");
+    model->setHeaderData(TClient_Tel,Qt::Horizontal,"Telephone");
+    model->setHeaderData(TClient_Commentaire,Qt::Horizontal,"Information");
+    model->setHeaderData(TClient_DateRdv,Qt::Horizontal,"Date");
+    model->setHeaderData(TClient_Priorite,Qt::Horizontal,"Priority");
+    model->setFilter(QString("Nom like '%%1%' or Prenom like '%%2%' or DateRdv BETWEEN '%3' AND '%4' or Id='%5'").arg(name).arg(fname).arg(date1).arg(date2).arg(id));
+    qDebug()<<QString("Nom like '%%1%' and Prenom like '%%2%' or DateRdv BETWEEN '%3' AND '%4' or Id='%5'").arg(name).arg(fname).arg(date1).arg(date2).arg(id);
     model->select();
     closeConnection();
     return model;

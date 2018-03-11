@@ -9,7 +9,7 @@ Adresse::Adresse()
     adrEntCodePostale = 0;
 }
 
-Adresse::Adresse(string strAdresse, string strVille, int EntCodePostale)
+Adresse::Adresse(QString strAdresse, QString strVille, qint32 EntCodePostale)
 {
     adrStrAdresse = strAdresse;
     adrStrVille = strVille;
@@ -28,11 +28,3 @@ Adresse::~Adresse()
 {
 }
 
-void Adresse::adrAfficheAdresse()
-{
-    cout << "Adresse Patient" << endl;
-    cout << "Libelle : " << this->adrStrAdresse << endl;
-    cout << "Ville : " << this->adrStrVille << endl;
-    cout << "Code Postale : " << this->adrEntCodePostale << endl;
-    cout << "-------------------------------------------------------------" << endl;
-}

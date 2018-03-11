@@ -580,13 +580,19 @@
         <widget class="QTimeEdit" name="timeEditDuration">
          <property name="maximumTime">
           <time>
-           <hour>22</hour>
+           <hour>23</hour>
            <minute>59</minute>
            <second>59</second>
           </time>
          </property>
+         <property name="currentSection">
+          <enum>QDateTimeEdit::MinuteSection</enum>
+         </property>
          <property name="displayFormat">
           <string>HH:mm</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
          </property>
          <property name="time">
           <time>
@@ -660,72 +666,13 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>1</x>
-        <y>90</y>
-        <width>561</width>
-        <height>41</height>
+        <x>0</x>
+        <y>70</y>
+        <width>641</width>
+        <height>91</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_18">
-       <item row="0" column="5">
-        <widget class="QLabel" name="labelListResources">
-         <property name="text">
-          <string>List of Resources</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_40">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>58</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="labelPriority">
-         <property name="text">
-          <string>Priority</string>
-         </property>
-         <property name="indent">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <spacer name="horizontalSpacer_57">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="7">
-        <widget class="QComboBox" name="comboBoxlistResource">
-         <property name="maxVisibleItems">
-          <number>10</number>
-         </property>
-         <property name="insertPolicy">
-          <enum>QComboBox::NoInsert</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QComboBox::AdjustToContents</enum>
-         </property>
-         <property name="modelColumn">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
+      <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="4">
         <spacer name="horizontalSpacer_56">
          <property name="orientation">
@@ -739,21 +686,8 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="8">
-        <spacer name="horizontalSpacer_42">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>88</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
-        <spacer name="horizontalSpacer_41">
+       <item row="0" column="6">
+        <spacer name="horizontalSpacer_57">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -772,6 +706,59 @@
          </property>
          <property name="maximum">
           <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <spacer name="horizontalSpacer_40">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>58</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="7">
+        <widget class="QListView" name="listViewRessource">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_41">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="labelPriority">
+         <property name="text">
+          <string>Priority</string>
+         </property>
+         <property name="indent">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="labelListResources">
+         <property name="text">
+          <string>List of Resources</string>
          </property>
         </widget>
        </item>
