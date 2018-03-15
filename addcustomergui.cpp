@@ -18,11 +18,10 @@ AddCustomerGUI::~AddCustomerGUI()
 }
 void AddCustomerGUI::addCustomer()
 {
-    qint32 idPerson = this->dataBase_Customer->lastIdofCustomerTable() ;//le dernier id de la table Client
+    qint32 idPerson = this->dataBase_Customer->lastIdTable("TClient");//le dernier id de la table Client
     QString namePerson = ui->lineEditName->text();
     QString fnamePerson = ui->lineEditFirstName->text();
     qint32 telPerson = ui->lineEditTelephone->text().toInt();
-    Personne * person = new Personne(idPerson+1,namePerson,fnamePerson,telPerson);
 
     QString addressAd = ui->lineEditAddress->text();
     qint32 postalCodeAd = ui->lineEditPostCode->text().toInt();
@@ -32,9 +31,9 @@ void AddCustomerGUI::addCustomer()
     QString comC = ui->textEditCommentary->toPlainText();
     QTime lenghCon = ui->timeEditDuration->time();
     qint32 priorityC = ui->spinBoxPriority->text().toInt();
-    Client * customer = new Client(*person,*address,lenghCon,priorityC,comC) ;
+    Client * customer = new Client(idPerson+1,namePerson,fnamePerson,telPerson,*address,lenghCon,priorityC,comC) ;
 
-    qint32 sizeResourceTable = this->dataBase_Resource->getSizeTableRessource();
+    qint32 sizeResourceTable = this->dataBase_Resource->getSizeTable("TRessource");
     QStandardItemModel * model = dynamic_cast<QStandardItemModel *>(ui->listViewRessource->model());
     for(qint32 index = 0 ;index < sizeResourceTable ;++index)
     {
@@ -85,7 +84,7 @@ void AddCustomerGUI::upCaseforLetter(QString line)
 
 void AddCustomerGUI::on_buttonBox_accepted()
 {
-    QMessageBox::warning(0,"Error","Forget some information , fill all champ please !!!");
+
 
     //addCustomer();
 }
@@ -96,3 +95,5 @@ void AddCustomerGUI::on_buttonBox_accepted()
 
                 //if(model->item(1,0)->checkState()==Qt::Checked)
                    // qDebug()<<myItem->accessibleText();*/
+
+

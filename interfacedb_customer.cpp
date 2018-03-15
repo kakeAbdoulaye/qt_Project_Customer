@@ -21,6 +21,7 @@ QSqlTableModel * interfacedb_Customer::getAllCustomer()
     model->setHeaderData(TClient_Priorite,Qt::Horizontal,"Priority");
     model->select();
     closeConnection();
+
     return model;
 }
 QSqlTableModel * interfacedb_Customer::getAllCustomerFiltered(QString name, QString fname, QString date1, QString date2, qint32 id)
@@ -88,20 +89,6 @@ QSqlTableModel * interfacedb_Customer::getAllCustomerFiltered(QString name, QStr
     closeConnection();
     return model;
 }
-qint32 interfacedb_Customer::lastIdofCustomerTable()
-{
-    createConnection();
-    QSqlQuery query;
-    QString request ="SELECT id as LastID FROM TClient ORDER BY id DESC LIMIT 1";
-    qint32 lastid;
-    if(query.exec(request))
-    {
-        query.next();
-        lastid= query.value("LastID").toString().toInt();
-    }
-    closeConnection();
-   return lastid;
-}
 void interfacedb_Customer::addCustomerToCustomerTable(Client *client, QString dateRDV)
 {
     createConnection();
@@ -110,14 +97,14 @@ void interfacedb_Customer::addCustomerToCustomerTable(Client *client, QString da
     QSqlQuery query;
     query = QSqlQuery(getDataBase());
     query.prepare(requestTClient);
-    query.bindValue(":iduser",client->getPATPersonne().getPERID());
-    query.bindValue(":nom",client->getPATPersonne().getPERNom());
-    query.bindValue(":prenom",client->getPATPersonne().getPERPrenom());
+    query.bindValue(":iduser",client->getPERID());
+    query.bindValue(":nom",client->getPERNom());
+    query.bindValue(":prenom",client->getPERPrenom());
     query.bindValue(":adr",client->getPATAdresse().getADRAdresse());
     query.bindValue(":ville",client->getPATAdresse().getADRVille());
     query.bindValue(":cp",client->getPATAdresse().getADRCodePostale());
     query.bindValue(":com",client->getPATCommentaire());
-    query.bindValue(":tel",client->getPATPersonne().getPERTelephone());
+    query.bindValue(":tel",client->getPERTelephone());
     query.bindValue(":daterdv",dateRDV);
     query.bindValue(":duree",client->getPATDureeConsultation());
     query.bindValue(":prio",client->getPATPriorite());
@@ -126,7 +113,7 @@ void interfacedb_Customer::addCustomerToCustomerTable(Client *client, QString da
         qDebug("Insert new customer !!");
     }
     closeConnection();
-    qint32 lastIdTRdv =lastIDofTableRdv() ;
+    qint32 lastIdTRdv = lastIdTable("TRdv") ;
     createConnection();
     QSqlQuery query2;
     query2 = QSqlQuery(getDataBase());
@@ -134,7 +121,7 @@ void interfacedb_Customer::addCustomerToCustomerTable(Client *client, QString da
     {
         query2.prepare(requestTRdv);
         query2.bindValue(":id",lastIdTRdv+myIterator+1);
-        query2.bindValue(":iduser",client->getPATPersonne().getPERID());
+        query2.bindValue(":iduser",client->getPERID());
         query2.bindValue(":idress",client->getPATVecRessource().at(myIterator));
         query2.exec();
     }

@@ -4,14 +4,21 @@ Ressource::Ressource()
 {
 }
 
-Ressource::Ressource(int idres)
+Ressource::Ressource(qint32 entId ,QString strNom, QString strPrenom):Personne(entId ,strNom,strPrenom)
 {
-    this->idRessource = idres;
+    login="";
+    motPasse="";
+}
+Ressource::Ressource(qint32 entId ,QString strNom, QString strPrenom,QString log , QString mdp):Personne(entId ,strNom,strPrenom)
+{
+    login=log;
+    motPasse=mdp;
 }
 
-Ressource::Ressource(const Ressource & ressource)
+Ressource::Ressource(const Ressource & ressource):Personne(ressource)
 {
-    this->idRessource = ressource.idRessource;
+    login=ressource.login;
+    motPasse=ressource.motPasse;
     this->listeRdv = ressource.listeRdv;
 }
 
@@ -142,7 +149,7 @@ int Ressource::insererRDV(int debutPossible, int duree, int idClient)
 void Ressource::affichagePlanning()
 {
     map<IntervalleHeure, int>::iterator it;
-    cout << "Ressource No :  " << this->idRessource << "  --->   ";
+    cout << "Ressource No :  " << this->getPERID() << "  --->   ";
     for (it = this->listeRdv.begin(); it != this->listeRdv.end(); it++)
     {
         IntervalleHeure interval = it->first;

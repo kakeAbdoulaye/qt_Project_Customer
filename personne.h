@@ -19,6 +19,7 @@ private :
 public:
     Personne();
     Personne(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone);
+    Personne(qint32 entId ,QString strNom, QString strPrenom);
     Personne(Personne const& personne);
     ~Personne();
 

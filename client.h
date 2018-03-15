@@ -11,11 +11,10 @@
 
 using namespace std;
 
-class Client
+class Client :public Personne
 {
 
 private:
-    Personne  patPersonne;
     Adresse  patAdresse;
     QString patStrCommentaire;
     qint32 patEntDureeConsultation;
@@ -25,12 +24,11 @@ private:
 public:
     Client();
     Client(Client const& Client);
-    Client(Personne  personne, Adresse adresse , int entDuree , int entPrio , QString strCom);
+    Client(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone, Adresse adresse , int entDuree , int entPrio , QString strCom);
 
-    Client(Personne  personne, Adresse adresse ,QTime duree, int entPrio , QString strCom);
+    Client(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone, Adresse adresse ,QTime duree, int entPrio , QString strCom);
     ~Client();
 
-    Personne getPATPersonne() { return patPersonne; }
     Adresse getPATAdresse() { return patAdresse; }
     QString getPATCommentaire() { return patStrCommentaire; }
     qint32 getPATDureeConsultation() { return patEntDureeConsultation; }
@@ -48,7 +46,7 @@ public:
     qint32 convertirTime(QTime Duree);
 
     //Mettre la duree au quart heure
-    void setPATPersonne(Personne  perPersone) { patPersonne = perPersone ; }
+
     void setPATAdresse(Adresse  adrAdresse) {  patAdresse = adrAdresse ; }
     void setPATCommentaire(QString strCom) { patStrCommentaire = strCom; }
     void setPATDureeConsultation(qint32 entHeureC) {  patEntDureeConsultation = entHeureC; }

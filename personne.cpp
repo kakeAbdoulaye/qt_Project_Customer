@@ -10,14 +10,21 @@ Personne::Personne()
     perEntId = 0;
 }
 
-Personne::Personne(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone)
+Personne::Personne(qint32 entId , QString strNom, QString strPrenom)
 {
     perEntId = entId;
     perStrNom = strNom;
     perStrPrenom = strPrenom;
-    perEntTelephone = entTelephone;
+    perEntTelephone = 0;
 }
-
+Personne::Personne(qint32 entId , QString strNom, QString strPrenom,qint32 tele)
+{
+    perEntId = entId;
+    perStrNom = strNom;
+    perStrPrenom = strPrenom;
+    perEntTelephone = 0;
+    perEntTelephone = tele;
+}
 Personne::Personne(Personne const & personne)
 {
     perEntId = personne.perEntId;

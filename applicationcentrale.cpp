@@ -100,6 +100,7 @@ void ApplicationCentrale::initTableViewCustomer()
 }
 void ApplicationCentrale::filtered()
 {
+    //liberer lancien model avant
     qint32 TClient_Id = ui->lineEditIdenSearch->text().toInt();
     QString TClient_Nom=ui->lineEditNameSearch->text();
     QString TClient_Prenom=ui->lineEditFisrtNameSearch->text();
@@ -112,5 +113,7 @@ void ApplicationCentrale::filtered()
 
 void ApplicationCentrale::on_ButtonLoadTableCustomer_clicked(bool checked)
 {
-    initTableViewCustomer();
+    //this->modelSQl;
+    //initTableViewCustomer();
+    //liberer le model d'avant
 }

@@ -120,18 +120,48 @@ QStandardItemModel * interfacedb_Resource::getAllRessource_TreeView()
 
     return monModel;
 }
-qint32 interfacedb_Resource::getSizeTableRessource()
-{
 
+void interfacedb_Resource::addStaffToResourceTable(Ressource ressoure, QString type)
+{
     createConnection();
+    QString requestTRessource = "INSERT INTO TRessource (Id,Nom,Prenom,IdType)VALUES(:idres,:nom,:prenom,:idtype);";
+    QString requestTType= QString("SELECT Id FROM TType WHERE Label='%1'").arg(type);
+    QString requestTCompte= "INSERT INTO TCompte(Id,IdRessource,Login,MdP) VALUES(:idcompte,:idress,:log,:mdp)";
+
     QSqlQuery query;
-    QString request = "SELECT count(*) as SIZE FROM TRessource";
-    qint32 size;
-    if(query.exec(request))
+    query = QSqlQuery(getDataBase());
+    //On recupere l'id du type de la ressource
+    qint32  idType ;
+    if(query.exec(requestTType))
     {
-        query.next();
-        size= query.value("SIZE").toString().toInt();
+         query.next();
+         idType= query.value("Id").toString().toInt();
+    }
+    //On insere la ressource dans la base de données
+    query.prepare(requestTRessource);
+    query.bindValue(":idres",ressoure.getPERID());
+    query.bindValue(":nom",ressoure.getPERNom());
+    query.bindValue(":prenom",ressoure.getPERPrenom());
+    query.bindValue(":idtype",idType);
+    if(query.exec())
+    {
+        qDebug("Insert new Ressource !!");
     }
     closeConnection();
-   return size;
+    // si C'est un informaticien la ressource , je lui cree un compte
+    if(!ressoure.getLogin().isEmpty() && !ressoure.getMotPasse().isEmpty())
+    {
+        qint32 lastIdTCompte= lastIdTable("TCompte") ;
+        createConnection();
+        QSqlQuery query2;
+        query2 = QSqlQuery(getDataBase());
+        query2.prepare(requestTCompte);
+        query2.bindValue(":idcompte",lastIdTCompte+1);
+        query2.bindValue(":idress",ressoure.getPERID());
+        query2.bindValue(":log",ressoure.getLogin());
+        query2.bindValue(":mdp",ressoure.getMotPasse());
+        query2.exec();
+         closeConnection();
+    }
+
 }

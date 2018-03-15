@@ -43,9 +43,9 @@ public:
     bool closeConnection();
     bool checkLoginPasswordDB(QString login , QString password);
     QSqlTableModel * getAllType(qint32 id=-1);
-
+    qint32 lastIdTable(QString TableName);
+    qint32 getSizeTable(QString TableName);
     QSqlDatabase getDataBase(){return dataBase;}
-    qint32 lastIDofTableRdv();
 
 private :
 

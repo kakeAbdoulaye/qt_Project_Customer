@@ -51,6 +51,7 @@ bool InterfaceDB::checkLoginPasswordDB(QString login, QString password)
     {
         qDebug() << query.lastError().text();
         qDebug() << "Request Error  !\n";
+        closeConnection();
         return check;
     }
     else
@@ -70,13 +71,28 @@ bool InterfaceDB::checkLoginPasswordDB(QString login, QString password)
         return check;
     }
 }
+qint32 InterfaceDB::lastIdTable(QString TableName)
+{
 
+    createConnection();
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    QString request =QString("SELECT id as LastID FROM %1 ORDER BY id DESC LIMIT 1").arg(TableName);
+    qint32 lastid;
+
+    if(query.exec(request))
+    {
+        query.next();
+        lastid= query.value("LastID").toString().toInt();
+    }
+    closeConnection();
+   return lastid;
+}
 QSqlTableModel * InterfaceDB::getAllType(qint32 id)
 {
     createConnection();
     QSqlTableModel * model = new QSqlTableModel;
     model->setTable("TType");
-    qDebug()<<id;
     if(id != -1)
     {
         model->setFilter(QString("Id='%1'").arg(id));
@@ -85,17 +101,19 @@ QSqlTableModel * InterfaceDB::getAllType(qint32 id)
     closeConnection();
     return model;
 }
-qint32 InterfaceDB::lastIDofTableRdv()
+qint32 InterfaceDB::getSizeTable(QString TableName)
 {
     createConnection();
     QSqlQuery query;
-    QString request ="SELECT id as LastID FROM TRdv ORDER BY id DESC LIMIT 1";
-    qint32 lastid;
+    query = QSqlQuery(getDataBase());
+    QString request =QString("SELECT count(*) as SIZE FROM %1").arg(TableName);
+    qint32 size;
+
     if(query.exec(request))
     {
         query.next();
-        lastid= query.value("LastID").toString().toInt();
+        size= query.value("SIZE").toString().toInt();
     }
     closeConnection();
-   return lastid;
+   return size;
 }

@@ -41,7 +41,7 @@
    <property name="title">
     <string>Person Information</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -196,7 +196,11 @@
       <widget class="QLineEdit" name="lineEditFirstName"/>
      </item>
      <item row="2" column="6" colspan="2">
-      <widget class="QComboBox" name="comboBoxType"/>
+      <widget class="QComboBox" name="comboBoxType">
+       <property name="insertPolicy">
+        <enum>QComboBox::NoInsert</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -229,7 +233,7 @@
    <property name="title">
     <string>Authentication Information  </string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>

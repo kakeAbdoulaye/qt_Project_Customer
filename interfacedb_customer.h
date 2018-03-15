@@ -22,7 +22,6 @@ public:
     interfacedb_Customer();
     QSqlTableModel * getAllCustomer();
     QSqlTableModel * getAllCustomerFiltered(QString name,QString fname,QString date1 , QString date2 ,qint32 id);
-    qint32 lastIdofCustomerTable();
     void addCustomerToCustomerTable(Client * client, QString dateRDV);
 
 

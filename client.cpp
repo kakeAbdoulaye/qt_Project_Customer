@@ -2,18 +2,16 @@
 
 
 
-Client::Client()
+Client::Client():Personne()
 {
-    patPersonne = Personne();
     patAdresse =  Adresse();
     patStrCommentaire = "";
     patEntDureeConsultation = 0;
     patEntPriorite = 0;
 }
 
-Client::Client(Client const & client)
+Client::Client(Client const & client):Personne(client)
 {
-    patPersonne = client.patPersonne;
     patAdresse = client.patAdresse ;
     patStrCommentaire = client.patStrCommentaire;
     patEntDureeConsultation = client.patEntDureeConsultation;
@@ -21,17 +19,17 @@ Client::Client(Client const & client)
     patVecIdenRessource = client.patVecIdenRessource;
 }
 
-Client::Client(Personne  personne, Adresse  adresse, qint32 entDuree, qint32 entPrio, QString strCom)
+Client::Client(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone, Adresse  adresse, qint32 entDuree, qint32 entPrio, QString strCom)
+    :Personne(entId ,strNom,strPrenom,entTelephone)
 {
-    patPersonne = personne;
     patAdresse = adresse ;
     patStrCommentaire = strCom;
     patEntDureeConsultation = entDuree;
     patEntPriorite = entPrio;
 }
-Client::Client(Personne  personne, Adresse  adresse, QTime Duree, qint32 entPrio, QString strCom)
+Client::Client(qint32 entId ,QString strNom, QString strPrenom, qint32 entTelephone, Adresse  adresse, QTime Duree, qint32 entPrio, QString strCom)
+    :Personne(entId ,strNom,strPrenom,entTelephone)
 {
-    patPersonne = personne;
     patAdresse = adresse ;
     patStrCommentaire = strCom;
     patEntDureeConsultation = convertirTime(Duree);

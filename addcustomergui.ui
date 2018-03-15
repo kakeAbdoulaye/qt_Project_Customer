@@ -37,22 +37,6 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>520</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="labelAddCustomer">
    <property name="geometry">
     <rect>
@@ -82,7 +66,7 @@
     <enum>QTabWidget::North</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="tabBarAutoHide">
     <bool>false</bool>
@@ -103,7 +87,7 @@
      <property name="title">
       <string>Customer Information </string>
      </property>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget_1">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -131,9 +115,6 @@
          <property name="text">
           <string>Name  :</string>
          </property>
-         <property name="buddy">
-          <cstring></cstring>
-         </property>
         </widget>
        </item>
        <item row="0" column="2">
@@ -153,6 +134,9 @@
         <widget class="QLineEdit" name="lineEditName">
          <property name="inputMethodHints">
           <set>Qt::ImhPreferUppercase|Qt::ImhUppercaseOnly</set>
+         </property>
+         <property name="inputMask">
+          <string>&gt;A&lt;AAAAAAAAAAAAAA</string>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Normal</enum>
@@ -206,7 +190,11 @@
         </spacer>
        </item>
        <item row="1" column="3">
-        <widget class="QLineEdit" name="lineEditFirstName"/>
+        <widget class="QLineEdit" name="lineEditFirstName">
+         <property name="inputMask">
+          <string>&gt;A&lt;AAAAAAAAAAAAAAAAAAA</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="4">
         <spacer name="horizontalSpacer_86">
@@ -236,7 +224,7 @@
      <property name="title">
       <string>Contact</string>
      </property>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -246,8 +234,11 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_20">
-       <item row="0" column="0" rowspan="2">
-        <spacer name="horizontalSpacer_90">
+       <item row="4" column="3">
+        <widget class="QLineEdit" name="lineEditTelephone"/>
+       </item>
+       <item row="4" column="4">
+        <spacer name="horizontalSpacer_100">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -259,129 +250,8 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="labelAddress">
-         <property name="text">
-          <string>Address Line</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" rowspan="2">
-        <spacer name="horizontalSpacer_94">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLineEdit" name="lineEditAddress"/>
-       </item>
-       <item row="0" column="4">
-        <spacer name="horizontalSpacer_96">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="4" rowspan="2">
-        <spacer name="horizontalSpacer_98">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="0">
-        <spacer name="horizontalSpacer_91">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="labelTown">
-         <property name="text">
-          <string>Town  : </string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <spacer name="horizontalSpacer_97">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLineEdit" name="lineEditTown"/>
-       </item>
-       <item row="3" column="0">
-        <spacer name="horizontalSpacer_92">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="labelPostCode">
-         <property name="text">
-          <string>Post Code  : </string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <spacer name="horizontalSpacer_99">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="3">
-        <widget class="QLineEdit" name="lineEditPostCode"/>
-       </item>
-       <item row="3" column="4">
-        <spacer name="horizontalSpacer_95">
+       <item row="4" column="2">
+        <spacer name="horizontalSpacer_101">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -413,8 +283,15 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
-        <spacer name="horizontalSpacer_101">
+       <item row="2" column="1">
+        <widget class="QLabel" name="labelTown">
+         <property name="text">
+          <string>Town  : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <spacer name="horizontalSpacer_96">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -426,11 +303,8 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="3">
-        <widget class="QLineEdit" name="lineEditTelephone"/>
-       </item>
-       <item row="4" column="4">
-        <spacer name="horizontalSpacer_100">
+       <item row="2" column="0">
+        <spacer name="horizontalSpacer_91">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -441,6 +315,131 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="1" column="4" rowspan="2">
+        <spacer name="horizontalSpacer_98">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="2">
+        <spacer name="horizontalSpacer_99">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLineEdit" name="lineEditPostCode"/>
+       </item>
+       <item row="3" column="4">
+        <spacer name="horizontalSpacer_95">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="labelPostCode">
+         <property name="text">
+          <string>Post Code  : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <spacer name="horizontalSpacer_97">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <spacer name="horizontalSpacer_92">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLineEdit" name="lineEditTown">
+         <property name="inputMask">
+          <string>&gt;A&lt;AAAAAAAAAAAAAA</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" rowspan="2">
+        <spacer name="horizontalSpacer_94">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="labelAddress">
+         <property name="text">
+          <string>Address Line</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" rowspan="2">
+        <spacer name="horizontalSpacer_90">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLineEdit" name="lineEditAddress">
+         <property name="inputMask">
+          <string/>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -586,7 +585,7 @@
           </time>
          </property>
          <property name="currentSection">
-          <enum>QDateTimeEdit::MinuteSection</enum>
+          <enum>QDateTimeEdit::HourSection</enum>
          </property>
          <property name="displayFormat">
           <string>HH:mm</string>
@@ -766,6 +765,43 @@
      </widget>
     </widget>
    </widget>
+  </widget>
+  <widget class="QLabel" name="labelInformation">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>515</y>
+     <width>231</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Yu Gothic UI Semibold</family>
+     <pointsize>22</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>520</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
   </widget>
  </widget>
  <resources/>
