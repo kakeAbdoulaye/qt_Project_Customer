@@ -5,7 +5,9 @@
 #include <QDialog>
 #include <QStandardItemModel>
 #include<QString>
-#include "interfacedb.h"
+#include <QMessageBox>
+#include "interfacedb_resource.h"
+#include "interfacedb_customer.h"
 
 namespace Ui {
 class AddCustomerGUI;
@@ -23,12 +25,14 @@ private:
     Ui::AddCustomerGUI *ui;
     qint32 userId;
     QStandardItemModel * model ;
-    InterfaceDB dataBase ;
+    interfacedb_Customer * dataBase_Customer ;
+    interfacedb_Resource  * dataBase_Resource;
 
      void initCustomerData();
  private slots:
     void upCaseforLetter(QString line);
     void addCustomer();
+    void on_buttonBox_accepted();
 };
 
 #endif // ADDCUSTOMERGUI_H

@@ -9,6 +9,9 @@
 #include "addcustomergui.h"
 #include "addstaffgui.h"
 #include "windowsabout.h"
+#include "interfacedb_resource.h"
+#include "interfacedb_customer.h"
+
 namespace Ui {
 class ApplicationCentrale;
 }
@@ -24,9 +27,10 @@ public:
 private:
     Ui::ApplicationCentrale *ui;
     QActionGroup * actionGroup ;
-    InterfaceDB dataBase ;
     QSqlTableModel * modelSQl;
     QStandardItemModel * modelSTANITEM;
+    interfacedb_Customer * dataBase_Customer ;
+    interfacedb_Resource  * dataBase_Resource;
 
 
     void initGroupAction();
@@ -37,6 +41,7 @@ private slots:
     void exitApplication();
     void manageAction(QAction * sender);
     void filtered();
+    void on_ButtonLoadTableCustomer_clicked(bool checked);
 };
 
 #endif // APPLICATIONCENTRALE_H

@@ -35,7 +35,9 @@ SOURCES += \
     adresse.cpp \
     client.cpp \
     ressource.cpp \
-    personne.cpp
+    personne.cpp \
+    interfacedb_customer.cpp \
+    interfacedb_resource.cpp
 
 HEADERS += \
         applicationcentrale.h \
@@ -48,7 +50,9 @@ HEADERS += \
     adresse.h \
     client.h \
     ressource.h \
-    personne.h
+    personne.h \
+    interfacedb_customer.h \
+    interfacedb_resource.h
 
 FORMS += \
         applicationcentrale.ui \

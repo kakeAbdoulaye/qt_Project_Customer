@@ -9,6 +9,8 @@ ApplicationCentrale::ApplicationCentrale(QWidget *parent) :
     ui(new Ui::ApplicationCentrale)
 {
     ui->setupUi(this);
+    this->dataBase_Customer = new interfacedb_Customer ;
+    this->dataBase_Resource = new interfacedb_Resource;
     initGroupAction();
     initTreeViewPerson();
     initTableViewCustomer();
@@ -87,12 +89,12 @@ void ApplicationCentrale::exitApplication()
 
 void ApplicationCentrale::initTreeViewPerson()
 {
-   modelSTANITEM = dataBase.getAllRessource_TreeView() ;
-    ui->treeViewPerson->setModel(modelSTANITEM);
+   modelSTANITEM = this->dataBase_Resource->getAllRessource_TreeView() ;
+   ui->treeViewPerson->setModel(modelSTANITEM);
 }
 void ApplicationCentrale::initTableViewCustomer()
 {
-     modelSQl = dataBase.getAllCustomer() ;
+     modelSQl = this->dataBase_Customer->getAllCustomer() ;
      ui->tableViewCustomer->setModel(modelSQl);
      ui->lineEditIdenSearch->setValidator(new QIntValidator(0,999999999,this));
 }
@@ -103,11 +105,12 @@ void ApplicationCentrale::filtered()
     QString TClient_Prenom=ui->lineEditFisrtNameSearch->text();
     QString TClient_DateRdv1= ui->dateEditSearch1->text();
     QString TClient_DateRdv2=ui->dateEditSearch2->text();
-    modelSQl = dataBase.getAllCustomerFiltered(TClient_Nom,TClient_Prenom,TClient_DateRdv1,TClient_DateRdv2,TClient_Id);
+    modelSQl = this->dataBase_Customer->getAllCustomerFiltered(TClient_Nom,TClient_Prenom,TClient_DateRdv1,TClient_DateRdv2,TClient_Id);
     ui->tableViewCustomer->setModel(modelSQl);
     ui->lineEditIdenSearch->setValidator(new QIntValidator(0,999999999,this));
 }
 
-
-
-
+void ApplicationCentrale::on_ButtonLoadTableCustomer_clicked(bool checked)
+{
+    initTableViewCustomer();
+}

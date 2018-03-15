@@ -23,7 +23,7 @@ void AddStaffGUI::addModelToCombox()
 {
     InterfaceDB dataBase ;
     qint32 id = 7 ;
-    QSqlTableModel * modelCombox = dataBase.getAllType(id);
+    QSqlTableModel * modelCombox = dataBase.getAllType();
     ui->comboBoxType->setModel(modelCombox);
     ui->comboBoxType->setModelColumn(modelCombox->fieldIndex("label"));
     activeGroupBox(ui->comboBoxType->currentText());
