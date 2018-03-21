@@ -127,3 +127,42 @@ void interfacedb_Customer::addCustomerToCustomerTable(Client *client, QString da
     }
      closeConnection();
 }
+QStringList interfacedb_Customer::getCustomerByid(qint32 id)
+{
+    QString request = "SELECT * FROM TClient WHERE  Id=:iduser";
+    QStringList data ;
+    createConnection();
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.prepare(request);
+    query.bindValue(":iduser",id);
+
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            data << query.value("Id").toString();
+            data << query.value("Nom").toString();
+            data << query.value("Prenom").toString();
+            data << query.value("Adresse").toString();
+            data << query.value("Ville").toString();
+            data << query.value("CP").toString();
+            data << query.value("Commentaire").toString();
+            data << query.value("Tel").toString();
+            data << query.value("DateRDV").toString();
+            data << query.value("DureeRdv").toString();
+            data << query.value("Priorite").toString();
+        }
+    }
+    closeConnection();
+    return data;
+}
+void interfacedb_Customer::deleteRdvofCustomer(qint32 idcustomer)
+{
+    createConnection();
+    QString request =QString("DELETE FROM TRdv WHERE IdClient = %1 ").arg(idcustomer) ;
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.exec(request);
+    closeConnection();
+}

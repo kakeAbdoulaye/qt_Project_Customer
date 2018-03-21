@@ -88,18 +88,34 @@ qint32 InterfaceDB::lastIdTable(QString TableName)
     closeConnection();
    return lastid;
 }
-QSqlTableModel * InterfaceDB::getAllType(qint32 id)
+QSqlTableModel * InterfaceDB::getAllType()
 {
     createConnection();
     QSqlTableModel * model = new QSqlTableModel;
     model->setTable("TType");
-    if(id != -1)
-    {
-        model->setFilter(QString("Id='%1'").arg(id));
-    }
     model->select();
     closeConnection();
     return model;
+}
+QStringList InterfaceDB::getTypeByid(qint32 id)
+{
+    QString request = "SELECT * FROM TType WHERE  Id=:idtype";
+    QStringList data ;
+    createConnection();
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.prepare(request);
+    query.bindValue(":idtype",id);
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            data << query.value("Id").toString();
+            data << query.value("Label").toString();
+        }
+    }
+    closeConnection();
+    return data;
 }
 qint32 InterfaceDB::getSizeTable(QString TableName)
 {
@@ -116,4 +132,13 @@ qint32 InterfaceDB::getSizeTable(QString TableName)
     }
     closeConnection();
    return size;
+}
+void InterfaceDB::deleteToTable(QString TableName, qint32 id)
+{
+    createConnection();
+    QString request =QString("DELETE FROM %1 WHERE Id = %2 ").arg(TableName).arg(id) ;
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.exec(request);
+    closeConnection();
 }

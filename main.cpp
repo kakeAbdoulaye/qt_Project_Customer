@@ -10,11 +10,11 @@
 int main(int argc, char *argv[])
 {
    QApplication a(argc, argv);
-   // ApplicationCentrale w;
-   // w.show();
+    ApplicationCentrale w;
+    w.show();
     //C_INIT_BD::Creation_BD();
-   ConnexionUser user;
-    user.exec();
+  // ConnexionUser user;
+    //user.exec();
 
    // AddCustomerGUI gui ;
     //gui.exec();

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "interfacedb_resource.h"
+#include "interfacedb_customer.h"
 #include "ressource.h"
 
 namespace Ui {
@@ -20,8 +21,10 @@ public:
 
 private:
     Ui::AddStaffGUI *ui;
-    qint32 idRess ;
-    void addModelToCombox();
+    qint32 idRess  ;
+    void init();
+    interfacedb_Customer dataBase_Customer ;
+    interfacedb_Resource dataBase_Resource;
 signals:
     void emitActiveGroupBox(QString select);
 private slots:

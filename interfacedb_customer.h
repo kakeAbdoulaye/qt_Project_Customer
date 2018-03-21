@@ -23,6 +23,8 @@ public:
     QSqlTableModel * getAllCustomer();
     QSqlTableModel * getAllCustomerFiltered(QString name,QString fname,QString date1 , QString date2 ,qint32 id);
     void addCustomerToCustomerTable(Client * client, QString dateRDV);
+    void deleteRdvofCustomer(qint32 idcustomer);
+    QStringList getCustomerByid(qint32 id);
 
 
 };

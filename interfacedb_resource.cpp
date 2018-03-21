@@ -4,9 +4,9 @@ interfacedb_Resource::interfacedb_Resource()
 {
 
 }
-QStandardItemModel  * interfacedb_Resource::getAllRessource(qint32 id)
+QStandardItemModel* interfacedb_Resource::getAllRessource(qint32 id)
 {
-   QStandardItemModel * monModel =new QStandardItemModel  ;
+   QStandardItemModel * monModel = new QStandardItemModel  ;
    QMap<qint32,qint32> monMap ;
    QMap<qint32,qint32>::iterator iteratorMap;
    QString space =" ";
@@ -89,7 +89,8 @@ QStandardItemModel * interfacedb_Resource::getAllRessource_TreeView()
         while(query.next())
         {
           QString itemParent = query.value("Label").toString();
-          monMap.insert(itemParent,new QStandardItem(itemParent));
+          QStandardItem * parent = new QStandardItem(itemParent);
+          monMap.insert(itemParent,parent);
         }
     }
     if(query.exec("SELECT * FROM TRessource INNER JOIN TType ON TRessource.IdType = TType.ID"))
@@ -97,12 +98,12 @@ QStandardItemModel * interfacedb_Resource::getAllRessource_TreeView()
         while(query.next())
         {
             QString parent = query.value("Label").toString();
-            QString child = query.value("Nom").toString()+space+query.value("Prenom").toString();
+            QString child = query.value("Id").toString()+space+query.value("Nom").toString()+space+query.value("Prenom").toString();
             for (iteratorMap = monMap.begin(); iteratorMap != monMap.end(); ++iteratorMap)
             {
                if(iteratorMap.key() == parent)
                {
-                    QStandardItem * itemChild =new QStandardItem(child);
+                    QStandardItem * itemChild= new QStandardItem(child);
                     iteratorMap.value()->appendRow(itemChild);
                }
             }
@@ -164,4 +165,58 @@ void interfacedb_Resource::addStaffToResourceTable(Ressource ressoure, QString t
          closeConnection();
     }
 
+}
+QStringList interfacedb_Resource::getRessourceByid(qint32 id)
+{
+    QString request = "SELECT * FROM TRessource WHERE  Id=:idres";
+    QStringList data ;
+    createConnection();
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.prepare(request);
+    query.bindValue(":idres",id);
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            data << query.value("Id").toString();
+            data << query.value("Nom").toString();
+            data << query.value("Prenom").toString();
+            data << query.value("IdType").toString();
+        }
+    }
+    closeConnection();
+    return data;
+}
+QStringList interfacedb_Resource::getCompteByResourceid(qint32 id)
+{
+    QString request = "SELECT * FROM TCompte WHERE  IdRessource=:idres";
+    QStringList data ;
+    createConnection();
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.prepare(request);
+    query.bindValue(":idres",id);
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            data << query.value("Id").toString();
+            data << query.value("IdRessource").toString();
+            data << query.value("Login").toString();
+            data << query.value("MdP").toString();
+        }
+    }
+    closeConnection();
+    return data;
+}
+
+void interfacedb_Resource::deleteCompteofResource(qint32 idresource)
+{
+    createConnection();
+    QString request =QString("DELETE FROM TCompte WHERE IdRessource = %1 ").arg(idresource) ;
+    QSqlQuery query;
+    query = QSqlQuery(getDataBase());
+    query.exec(request);
+    closeConnection();
 }

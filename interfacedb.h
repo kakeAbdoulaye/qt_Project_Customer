@@ -16,19 +16,18 @@
 using namespace std;
 
 
-enum
-{
-    TRessource_id = 0,
-    TRessource_Nom = 1 ,
-    TRessource_Prenom = 2,
-    TRessource_idType = 3
-};
+
 enum TCompte
 {
-
+    TCompte_id = 0 ,
+    TCompte_IdRessource = 1 ,
+    TCompte_Login =2,
+    TCompte_MdP=3
 };
 enum TType
 {
+    TType_Id = 0 ,
+    TType_Label = 1
 
 };
 enum TRdv
@@ -42,11 +41,12 @@ public:
     bool createConnection();
     bool closeConnection();
     bool checkLoginPasswordDB(QString login , QString password);
-    QSqlTableModel * getAllType(qint32 id=-1);
+    QSqlTableModel * getAllType();
     qint32 lastIdTable(QString TableName);
     qint32 getSizeTable(QString TableName);
+    void deleteToTable(QString TableName , qint32 id);
     QSqlDatabase getDataBase(){return dataBase;}
-
+    QStringList getTypeByid(qint32 id);
 private :
 
     QSqlDatabase dataBase ;

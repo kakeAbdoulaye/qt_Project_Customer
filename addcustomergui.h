@@ -25,14 +25,16 @@ private:
     Ui::AddCustomerGUI *ui;
     qint32 userId;
     QStandardItemModel * model ;
-    interfacedb_Customer * dataBase_Customer ;
-    interfacedb_Resource  * dataBase_Resource;
+    interfacedb_Customer dataBase_Customer ;
+    interfacedb_Resource dataBase_Resource;
 
      void initCustomerData();
+     void reset();
  private slots:
-    void upCaseforLetter(QString line);
     void addCustomer();
+    bool check();
     void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 };
 
 #endif // ADDCUSTOMERGUI_H

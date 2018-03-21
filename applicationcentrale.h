@@ -29,8 +29,10 @@ private:
     QActionGroup * actionGroup ;
     QSqlTableModel * modelSQl;
     QStandardItemModel * modelSTANITEM;
-    interfacedb_Customer * dataBase_Customer ;
-    interfacedb_Resource  * dataBase_Resource;
+    interfacedb_Customer  dataBase_Customer ;
+    interfacedb_Resource  dataBase_Resource;
+    qint32 idUser = - 1;
+    qint32 idRessource = - 1;
 
 
     void initGroupAction();
@@ -41,7 +43,14 @@ private slots:
     void exitApplication();
     void manageAction(QAction * sender);
     void filtered();
-    void on_ButtonLoadTableCustomer_clicked(bool checked);
+    void on_ButtonLoadTableCustomer_clicked();
+    void on_ButtonAddCustomer_clicked();
+    void on_Button_AddPerson_clicked();
+    void on_ButtonEditCustomer_clicked();
+    void on_ButtonDeleteCustomer_clicked();
+    void on_Button_EditPerson_clicked();
+    void on_Button_Delete_clicked();
+    void LoadTreeViewPerson_clicked();
 };
 
 #endif // APPLICATIONCENTRALE_H
